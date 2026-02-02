@@ -217,12 +217,15 @@ Ollama Manager System
 
 ## Useful Model Names
 
-Common Ollama models to try:
-- llama2 (7B, 13B, 70B)
-- mistral
-- codellama
-- llama3
-- neural-chat
-- starling-lm
+Popular Ollama models to try (as of 2025):
+- **llama3.3** - Latest Llama 3 series (highly recommended)
+- **llama3.2** - Llama 3.2 with multimodal support
+- **llama3.1** - Llama 3.1 series (various sizes)
+- **llama2** - Llama 2 (7B, 13B, 70B)
+- **mistral** - Mistral AI models
+- **codellama** - Code generation specialist
+- **phi3** - Microsoft Phi-3 models
+- **gemma2** - Google Gemma 2 series
+- **qwen2.5** - Alibaba Qwen 2.5 series
 
 Pull with: `./ollama_cli.py pull <model-name>`

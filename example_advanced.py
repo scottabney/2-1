@@ -8,6 +8,10 @@ from ollama_manager import OllamaManager, CommandExecutor, APIConnector
 from config_manager import ConfigManager
 import time
 
+# Constants
+SERVICE_START_DELAY_SECONDS = 2  # Time to wait for Ollama service to initialize
+MAX_DISPLAY_LENGTH = 100  # Maximum characters to display from responses
+
 
 def main():
     print("=" * 70)
@@ -31,7 +35,7 @@ def main():
         print("⚠️  Service not running. Starting...")
         if manager.start_ollama_service():
             print("✅ Service started successfully")
-            time.sleep(2)  # Give it time to initialize
+            time.sleep(SERVICE_START_DELAY_SECONDS)  # Give it time to initialize
         else:
             print("❌ Failed to start service")
             return
@@ -95,8 +99,8 @@ def main():
         
         response = manager.run_inference(test_prompt, stream=False)
         if response:
-            # Print first 100 chars of response
-            print(response.strip()[:100])
+            # Print first MAX_DISPLAY_LENGTH chars of response
+            print(response.strip()[:MAX_DISPLAY_LENGTH])
         else:
             print("Failed to get response")
     

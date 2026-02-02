@@ -331,7 +331,17 @@ class CommandExecutor:
             Dictionary with stdout, stderr, and returncode
         """
         # Safety check
-        cmd_parts = command.split()
+        import shlex
+        
+        try:
+            cmd_parts = shlex.split(command)
+        except ValueError as e:
+            return {
+                'stdout': '',
+                'stderr': f'Invalid command syntax: {e}',
+                'returncode': 1
+            }
+            
         if not cmd_parts:
             return {
                 'stdout': '',
@@ -351,8 +361,8 @@ class CommandExecutor:
         try:
             self.logger.info(f"Executing command: {command}")
             result = subprocess.run(
-                command,
-                shell=True,
+                cmd_parts,
+                shell=False,
                 capture_output=True,
                 text=True,
                 timeout=timeout

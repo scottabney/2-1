@@ -5,6 +5,9 @@ Example: API operations with Ollama Manager
 
 from ollama_manager import APIConnector
 
+# Constants
+MAX_DISPLAY_LENGTH = 100  # Maximum characters to display from responses
+
 def main():
     print("=" * 60)
     print("Example 2: API Operations")
@@ -36,7 +39,8 @@ def main():
         )
         
         if result:
-            print(f"   Response: {result.get('response', 'No response')[:100]}...")
+            response_text = result.get('response', 'No response')[:MAX_DISPLAY_LENGTH]
+            print(f"   Response: {response_text}...")
         else:
             print("   Generation failed")
     
@@ -49,7 +53,8 @@ def main():
         result = api.chat(model=model_name, messages=messages)
         if result:
             message = result.get('message', {})
-            print(f"   Assistant: {message.get('content', 'No content')[:100]}...")
+            content_text = message.get('content', 'No content')[:MAX_DISPLAY_LENGTH]
+            print(f"   Assistant: {content_text}...")
     
     print("\n" + "=" * 60)
     print("Example complete!")
