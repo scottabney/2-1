@@ -12,6 +12,7 @@ import subprocess
 import json
 import os
 import logging
+import time
 from typing import Optional, Dict, List, Any
 from datetime import datetime
 
@@ -70,7 +71,6 @@ class OllamaManager:
                 start_new_session=True
             )
             # Give it a moment to start
-            import time
             time.sleep(2)
             return self.check_ollama_running()
         except Exception as e:

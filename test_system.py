@@ -7,6 +7,7 @@ Run with: python3 test_system.py
 import unittest
 import sys
 import os
+import subprocess
 from unittest.mock import Mock, patch, MagicMock
 from io import StringIO
 
@@ -99,9 +100,10 @@ class TestCommandExecutor(unittest.TestCase):
     @patch('subprocess.run')
     def test_command_timeout(self, mock_run):
         """Test command timeout handling."""
-        mock_run.side_effect = Exception("Timeout")
+        mock_run.side_effect = subprocess.TimeoutExpired(cmd='ls', timeout=1)
         result = self.executor.execute("ls", timeout=1)
-        self.assertEqual(result['returncode'], 1)
+        self.assertEqual(result['returncode'], 124)
+        self.assertIn('timed out', result['stderr'])
 
 
 class TestAPIConnector(unittest.TestCase):
