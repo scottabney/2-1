@@ -1,0 +1,8 @@
+# Ollama Manager System Requirements
+# Install with: pip install -r requirements.txt
+
+# For API connectivity
+requests>=2.31.0
+
+# Optional but recommended for better performance
+# psutil>=5.9.0  # For system monitoring
